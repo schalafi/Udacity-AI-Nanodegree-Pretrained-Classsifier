@@ -93,6 +93,6 @@ def classify_images(images_dir, results_dic, model):
         #add comparison result to the dictionary
         results_dic[key].append(comparison)        
         
-        
+    #print("RESULTS_DIC: ", results_dic)
 
 
