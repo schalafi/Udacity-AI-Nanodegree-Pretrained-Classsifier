@@ -21,6 +21,7 @@
 #
 ##
 # Imports classifier function for using CNN to classify images 
+import os 
 from classifier import classifier 
 
 # TODO 3: Define classify_images function below, specifically replace the None
@@ -65,4 +66,33 @@ def classify_images(images_dir, results_dic, model):
      Returns:
            None - results_dic is mutable data type so no return needed.         
     """
-    None 
+    
+    for i,key in enumerate(results_dic.keys()):
+        #full image path 
+        image_path = os.path.join(images_dir, key)
+
+        #image label from the name of the image
+        image_label = results_dic[key][0]
+
+        #image label predicted by the model (CNN)
+        model_label = classifier(image_path, model)
+        model_label = model_label.lower().strip()
+
+        #add image label from the model 
+        results_dic[key].append(model_label)
+
+        #compare image label provided by model with the ground truth label (image label)
+        #if one of the words  of image labe is on  model_label 
+        #then we have a match 1, otherwise 0
+        comparison = False 
+        for word  in image_label.split('_'):
+            if word in model_label:
+                comparison = True 
+                break
+        
+        #add comparison result to the dictionary
+        results_dic[key].append(comparison)        
+        
+        
+
+
