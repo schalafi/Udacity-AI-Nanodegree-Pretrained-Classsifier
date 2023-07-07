@@ -51,6 +51,7 @@ def get_pet_labels(image_dir):
         pet_label = None
         words = filename.split('_')
         pet_label = ' '.join(words[:-1]).lower()
+        pet_label = pet_label.strip()
         if not filename in results_dic:
             results_dic[filename] = [pet_label]
         else:
