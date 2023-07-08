@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 # */AIPND-revision/intropyproject-classify-pet-images/calculates_results_stats_hints.py
 #                                                                             
-# PROGRAMMER:
-# DATE CREATED:                                  
+# PROGRAMMER: Alan V.
+# DATE CREATED: 07/07/2023                               
 # REVISED DATE: 
 # PURPOSE: This is a *hints* file to help guide students in creating the 
 #          function calculates_results_stats that calculates the statistics
@@ -131,6 +131,7 @@ def calculates_results_stats(results_dic):
 
 
     # Calculates run statistics (counts & percentages) below that are calculated
+  
     # using the counters from above.
     
     # calculates number of total images

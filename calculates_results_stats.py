@@ -70,4 +70,35 @@ def calculates_results_stats(results_dic):
     """        
     # Replace None with the results_stats_dic dictionary that you created with 
     # this function 
-    return None
+
+    results_stats_dic = {
+    'n_images':None, # number of images
+    'n_dogs_img': None, # number of dog images
+    'n_notdogs_img':None,  #number of NON-dog images
+    'n_match': None, #number of matches between pet & classifier labels
+    'n_correct_dogs': None, # number of correctly classified dog images
+    'n_correct_notdogs':None , # number of correctly classified NON-dog images
+    'n_correct_breed': None, # number of correctly classified dog breeds
+    'pct_match': None, # percentage of correct matches
+    'pct_correct_dogs': None, # percentage of correctly classified dogs
+    'pct_correct_breed': None,  # percentage of correctly classified dog breeds
+    'pct_correct_notdogs': None  # percentage of correctly classified NON-dogs
+    } 
+
+    results_stats_dic['n_images'] = len(results_dic)
+    results_stats_dic['n_dogs_img'] = sum(results_dic[k][3] for k in results_dic.keys())
+    results_stats_dic['n_notdogs_img'] = results_stats_dic['n_images'] - results_stats_dic['n_dogs_img']
+    results_stats_dic['n_match'] = sum(results_dic[k][2] for k in results_dic.keys())
+    #number of 1 and 1 matches between pet and classifier labels
+    results_stats_dic['n_correct_dogs'] = sum(results_dic[k][3] and results_dic[k][4] for k in results_dic.keys())
+    #number of 0 and 0 matches between pet and classifier labels
+    results_stats_dic['n_correct_notdogs'] = sum(not results_dic[k][3] and not results_dic[k][4] for k in results_dic.keys())
+    #if is classified as a dog and pet label is on the classifier labels
+    #then is correctly classified
+    results_stats_dic['n_correct_breed'] = sum(results_dic[k][3] and  results_dic[k][0] in results_dic[k][1] for k in results_dic.keys())
+    results_stats_dic['pct_match'] = results_stats_dic['n_match'] / results_stats_dic['n_images'] * 100
+    results_stats_dic['pct_correct_dogs'] = results_stats_dic['n_correct_dogs'] / results_stats_dic['n_dogs_img'] * 100
+    results_stats_dic['pct_correct_breed'] = results_stats_dic['n_correct_breed'] / results_stats_dic['n_dogs_img'] * 100
+    results_stats_dic['pct_correct_notdogs'] = results_stats_dic['n_correct_notdogs'] / results_stats_dic['n_notdogs_img'] * 100
+
+    return results_stats_dic
