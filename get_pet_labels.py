@@ -48,6 +48,10 @@ def get_pet_labels(image_dir):
     results_dic = {}
     
     for filename in files:
+        #Exclude hidden files
+        if filename.startswith('.'):
+            continue
+        
         pet_label = None
         words = filename.split('_')
         pet_label = ' '.join(words[:-1]).lower()
